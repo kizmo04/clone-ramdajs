@@ -1,0 +1,43 @@
+{
+  "name": "vanilla-functional-utils",
+  "description": "A practical functional utilities",
+  "version": "0.0.1",
+  "module": "es/index.js",
+  "main": "src/index.js",
+  "files": [
+    "es",
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "test": "cross-env BABEL_ENV=cjs mocha --require babel-register --reporter spec"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-annotate-pure-calls": "^0.2.0",
+    "babel-register": "^6.26.0",
+    "babel-types": "^6.26.0",
+    "babelify": "^8.0.0",
+    "benchmark": "~1.0.0",
+    "browserify": "https://api.github.com/repos/browserify/browserify/tarball/9ff7c55cc67a7ddbc64f8e7270bcd75fcc72ce2f",
+    "cli-table": "0.3.x",
+    "cross-env": "^2.0.1",
+    "dox": "latest",
+    "envvar": "1.x.x",
+    "eslint": "^2.11.0",
+    "handlebars": "3.0.x",
+    "istanbul": "^0.4.x",
+    "js-yaml": "^3.2.5",
+    "jsverify": "^0.7.3",
+    "mocha": "2.x.x",
+    "ramda": "0.17.x",
+    "rimraf": "~2.3.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-terser": "^1.0.1",
+    "sanctuary": "0.7.x",
+    "sinon": "^1.17.4",
+    "testem": "^2.9.0",
+    "xyz": "1.0.x"
+  }
+}
