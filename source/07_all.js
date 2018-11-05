@@ -24,8 +24,24 @@
  *      R.all(equals3)([3, 3, 1, 3]); //=> false
  */
 
-var all = function all (fn, list) {
-  // code here..
+var all = function all () {
+  switch (arguments.length) {
+    case 0:
+      return all;
+    case 1:
+      return all.bind(this, arguments[0]);
+    default:
+      if (!arguments[1].length) {
+        return true;
+      } else {
+        for (let i = 0; i < arguments[1].length; i++) {
+          if (!arguments[0](arguments[1][i])) {
+            return false;
+          }
+        }
+        return true;
+      }
+  }
 };
 
 export default all;
