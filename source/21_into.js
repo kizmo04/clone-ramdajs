@@ -37,8 +37,44 @@
  *      const intoArray = R.into([]);
  *      intoArray(transducer, numbers); //=> [2, 3]
  */
-var into = function into() {
 
+var merge = function(target, source) {
+  if (arguments.length < 1) {
+    return merge;
+  } else if (arguments.length < 2) {
+    return merge.bind(this, arguments[0]);
+  } else {
+    for (var key in source) {
+      target[key] = source[key];
+    }
+    return target;
+  }
+};
+
+var into = function into() {
+  function iterator (acc, item) {
+    if (Array.isArray(acc)) {
+      acc.push(item);
+    } else if (typeof acc === 'string') {
+      acc += item;
+    } else if (typeof acc === 'object' && !acc.length) {
+      if (Array.isArray(item)) {
+        acc[item[0]] = item[1];
+      } else {
+        merge(acc, item);
+      }
+    }
+    return acc;
+  }
+  if (arguments.length < 1) {
+    return into;
+  } else if (arguments.length < 2) {
+    return into.bind(this, arguments[0]);
+  } else if (arguments.length < 3) {
+    return into.bind(this, arguments[0], arguments[1]);
+  } else {
+    return arguments[1](arguments[2]).reduce(iterator, arguments[0]);
+  }
 };
 
 export default into;
