@@ -25,8 +25,26 @@
  *      fn(50); //=> 'nothing special happens at 50°C'
  *      fn(100); //=> 'water boils at 100°C'
  */
-var cond = function cond() {
 
+import _ from 'lodash';
+var cond = function cond(pairs) {
+  pairs.forEach(pair => {
+    if (pair[0].length > conded.length) {
+      Object.defineProperty(conded, 'length', { value: pair[0].length });
+    }
+  });
+  function conded() {
+    var result;
+
+    _.forEach(pairs, pair => {
+      if (pair[0](...arguments)) {
+        result = pair[1](...arguments);
+        return false;
+      }
+    });
+    return result;
+  }
+  return conded;
 };
 
 export default cond;
