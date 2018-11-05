@@ -17,8 +17,21 @@
  *
  *      R.until(R.gt(R.__, 100), R.multiply(2))(1) // => 128
  */
-var until = function until() {
 
+var until = function until(pred, fn, init) {
+  if (arguments.length < 1) {
+    return until;
+  } else if (arguments.length < 2) {
+    return until.bind(this, pred);
+  } else if (arguments.length < 3) {
+    return until.bind(this, pred, fn);
+  } else {
+    var value = init;
+    while (!pred(value)) {
+      value = fn(value);
+    }
+    return value;
+  }
 };
 
 export default until;
