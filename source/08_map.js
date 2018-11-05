@@ -33,8 +33,25 @@
  * @symb R.map(f, { x: a, y: b }) = { x: f(a), y: f(b) }
  * @symb R.map(f, functor_o) = functor_o.map(f)
  */
-var map = function map() {
+var map = function map(fn, source) {
+  if (!source) return map.bind(this, fn);
 
+  var result = [];
+  if (Array.isArray(source)) {
+    for (let i = 0; i < source.length; i++) {
+      result[i] = fn(source[i]);
+    }
+  } else if (typeof source === 'function') {
+    return function(...args) {
+      return fn(source.apply(this, args));
+    };
+  } else if (typeof source === 'object') {
+    result = {};
+    for (let key in source) {
+      result[key] = fn(source[key]);
+    }
+  }
+  return result;
 };
 
 export default map;
