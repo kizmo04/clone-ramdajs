@@ -21,6 +21,14 @@
  *      f(3, 4); // -(3^4) + 1
  * @symb R.pipe(f, g, h)(a, b) = h(g(f(a, b)))
  */
-export default function pipe() {
+export default function pipe(...fns) {
+	if (!fns.length) throw new Error('pipe requires at least one argument');
+  return function piped(...result) {
+    for (var i = 0; i < fns.length; i++) {
+      if (!Array.isArray(result)) result = [result];
+      result = fns[i].call(this, ...result);
+    }
+    return result;
+  };
 
 }
