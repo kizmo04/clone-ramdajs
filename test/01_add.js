@@ -1,5 +1,6 @@
 var R = require('../source');
 var eq = require('./shared/eq');
+var add10 = R.add(10);
 
 describe('add', function() {
   it('adds together two numbers when two arguments are given', function() {
@@ -19,5 +20,12 @@ describe('add', function() {
     eq(R.add(null, null), 0);
     eq(R.add(undefined, undefined), NaN);
     eq(R.add(new Date(1), new Date(2)), 3);
+    eq(R.add([], 2), 2);
+    eq(R.add({}, {}), NaN);
+    eq(R.add('', 2), 2);
+  });
+
+  it('curried', function() {
+    eq(add10(5), 15);
   });
 });

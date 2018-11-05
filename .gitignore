@@ -11,3 +11,4 @@
 /tmp-test-bundle.js
 /coverage/
 .DS_Store
+.vscode/

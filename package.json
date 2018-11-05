@@ -12,7 +12,9 @@
   "scripts": {
     "test": "cross-env BABEL_ENV=cjs mocha --require babel-register --reporter spec"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.10"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-annotate-pure-calls": "^0.2.0",
