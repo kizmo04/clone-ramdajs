@@ -26,8 +26,8 @@
  *      sayHelloToMs('Jane', 'Jones'); //=> 'Hello, Ms. Jane Jones!'
  * @symb R.partial(f, [a, b])(c, d) = f(a, b, c, d)
  */
-var partial = function partial () {
-
+var partial = function partial (f, args) {
+  return f.bind(this, ...args);
 };
 
 export default partial;
