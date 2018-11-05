@@ -23,9 +23,43 @@
  *      R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]
  *
  */
+var R = require('../source');
 
-var chain = function chain() {
-
+var chain = function chain(...args) {
+  var result = [];
+  switch (args.length) {
+    case 0:
+      return chain;
+    case 1:
+      return chain.bind(this, args[0]);
+    case 2:
+      if (typeof args[1] === 'function') {
+        var arg = R.compose(args[0], args[1]);
+        return chain.bind(this, arg);
+      } else if (Array.isArray(args[1])) {
+        args[1].forEach(item => {
+          if (Array.isArray(args[0](item))) {
+            args[0](item).forEach(v => {
+              result.push(v);
+            });
+          } else {
+            result.push(args[0](item));
+          }
+        });
+        return result;
+      }
+    default:
+      args[1](args[2]).forEach(item => {
+        if (Array.isArray(args[0](item))) {
+          args[0](item).forEach(v => {
+            result.push(v);
+          });
+        } else {
+          result.push(args[0](item));
+        }
+      });
+      return result;
+  }
 };
 
 export default chain;
