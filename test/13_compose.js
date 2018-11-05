@@ -14,7 +14,7 @@ describe('compose', function() {
     //  f :: (String, Number?) -> ([Number] -> [Number])
     var f = R.compose(R.map, R.multiply, parseInt);
 
-    eq(f('30')([1, 2, 3]), [30, 15, 10]);
+    eq(f('30')([1, 2, 3]), [30, 60, 90]);
     eq(f('10', 2)([1, 2, 3]), [2, 4, 6]);
   });
 
