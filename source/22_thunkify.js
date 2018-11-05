@@ -15,8 +15,12 @@
  *      R.thunkify(R.identity)(42)(); //=> 42
  *      R.thunkify((a, b) => a + b)(25, 17)(); //=> 42
  */
-var thunkify = function thunkify() {
-
+var thunkify = function thunkify(fn) {
+  Object.defineProperty(thunk, 'length', { value: fn.length });
+  function thunk(...args) {
+    return fn.bind(this, ...args);
+  }
+  return thunk;
 };
 
 export default thunkify;
