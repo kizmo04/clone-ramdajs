@@ -26,8 +26,25 @@
  *
  * @symb R.converge(f, [g, h])(a, b) = f(g(a, b), h(a, b))
  */
-var converge = function converge(after, fns) {
 
+import R from '../source';
+var converge = function converge(after, fns) {
+  var length = 0;
+  fns.forEach(fn => {
+    if (parseInt(fn.length) > parseInt(length)) length = fn.length;
+  });
+  Object.defineProperty(converged, 'length', { value: length });
+  return R.curry(converged);
+  function converged () {
+    var args = [];
+    var that = this;
+
+    fns.forEach(fn => {
+      args.push(fn.apply(that, arguments));
+    });
+
+    return after.apply(that, args);
+  }
 };
 
 export default converge;
