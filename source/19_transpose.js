@@ -22,8 +22,16 @@
  * @symb R.transpose([[a, b], [c, d]]) = [[a, c], [b, d]]
  * @symb R.transpose([[a, b], [c]]) = [[a, c], [b]]
  */
-var transpose = function transpose() {
+var transpose = function transpose(list) {
+  var result = [];
 
+  for (var i = 0; i < list.length; i++) {
+    for (var j = 0; j < list[i].length; j++) {
+      if (!result[j]) result[j] = [];
+      if (list[i].length) result[j].push(list[i][j]);
+    }
+  }
+  return result;
 };
 
 export default transpose;
