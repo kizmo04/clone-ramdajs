@@ -15,8 +15,17 @@
  *      R.flatten([1, 2, [3, 4], 5, [6, [7, 8, [9, [10, 11], 12]]]]);
  *      //=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
  */
-var flatten = function flatten () {
 
+var flatten = function(list) {
+  var result = [];
+  for (var i = 0; i < list.length; i++) {
+    if (Array.isArray(list[i])) {
+      result = result.concat(flatten(list[i]));
+    } else {
+      result.push(list[i]);
+    }
+  }
+  return result;
 };
 
 export default flatten;
