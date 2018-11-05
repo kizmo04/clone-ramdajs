@@ -45,8 +45,17 @@
  *      const firstOddTransducer = R.compose(R.filter(isOdd), R.take(1));
  *      R.transduce(firstOddTransducer, R.flip(R.append), [], R.range(0, 100)); //=> [1]
  */
-var transduce = function transduce() {
 
+var transduce = function transduce(xf, fn, acc, list) {
+  if (typeof fn !== 'function') {
+    return list.reduce(xf(fn).f, acc);
+  } else {
+    if (xf(fn).hasOwnProperty('f')) {
+      return list.reduce(xf(fn).f, acc);
+    } else {
+      return xf(list).reduce(fn, acc);
+    }
+  }
 };
 
 export default transduce;
