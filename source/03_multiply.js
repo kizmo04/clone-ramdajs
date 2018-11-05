@@ -18,8 +18,14 @@
  *      triple(4);       //=> 12
  *      R.multiply(2, 5);  //=> 10
  */
-var multiply = function multiply () {
-
+var multiply = function multiply (...values) {
+  if (values.length === 1) {
+    return multiply.bind(this, values[0]);
+  } else if (values.length > 1) {
+    return Number(values[0]) * Number(values[1]);
+  } else {
+    return multiply;
+  }
 };
 
 export default multiply;
