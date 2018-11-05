@@ -13,7 +13,11 @@
  *      R.negate(42); //=> -42
  */
 var negate = function negate(n) {
-
+  if (n === 0) {
+    return n.toString().length > 1 ? 0 : -0;
+  } else {
+    return -n;
+  }
 };
 
 export default negate;
