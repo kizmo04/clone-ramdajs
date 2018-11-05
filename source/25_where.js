@@ -34,7 +34,24 @@
  *      pred({a: 'foo', b: 'xxx', x: 11, y: 20}); //=> false
  */
 var where = function where() {
+  if (arguments.length < 1) {
+    return where;
+  } else if (arguments.length < 2) {
+    return where.bind(this, arguments[0]);
+  } else {
+    var spec = arguments[0];
+    var test = arguments[1];
+    var result = true;
 
+    for (var key in spec) {
+      if (spec.hasOwnProperty(key)) {
+        result = spec[key](test[key]);
+
+        if (!result) return result;
+      }
+    }
+    return result;
+  }
 };
 
 export default where;
