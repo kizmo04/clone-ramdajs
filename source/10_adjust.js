@@ -23,7 +23,15 @@
  */
 
 var adjust = function adjust(fn, idx, list) {
-  // code here..
+  if (!idx) {
+    return adjust.bind(this, fn);
+  } else if (!list) {
+    return adjust.bind(this, fn, idx);
+  }
+  list = Array.prototype.slice.call(list);
+
+  Array.prototype.splice.call(list, idx, 1, fn(list[idx]));
+  return list;
 };
 
 export default adjust;
