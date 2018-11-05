@@ -39,8 +39,19 @@
  *      const g = f(3);
  *      g(4); //=> 10
  */
-var curry = function curry() {
+var curry = function curry(fn) {
+  var length = fn.length;
 
+  Object.defineProperty(curried, 'length', { value: length });
+  return curried;
+  function curried () {
+    if (arguments.length < length) {
+      fn.bind(this, ...arguments);
+      return curried.bind(this, ...arguments);
+    } else {
+      return fn.apply(this, arguments);
+    }
+  }
 };
 
 export default curry;

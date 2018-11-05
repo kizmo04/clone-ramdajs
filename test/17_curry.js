@@ -46,7 +46,7 @@ describe('curry', function() {
 
   it('forwards extra arguments', function() {
     var f = function(a, b, c) {
-      void c;
+      void c; // 이것은 어떤용도인가요
       return Array.prototype.slice.call(arguments);
     };
     var g = R.curry(f);
