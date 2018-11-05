@@ -24,7 +24,13 @@
  * @symb R.unfold(f, x) = [f(x)[0], f(f(x)[1])[0], f(f(f(x)[1])[1])[0], ...]
  */
 var unfold = function unfold(fn, seed) {
+  var result = [];
 
+  for (var value = fn(seed); !!value; value = fn(value[1])) {
+    result.push(value[0]);
+  }
+
+  return result;
 };
 
 export default unfold;
