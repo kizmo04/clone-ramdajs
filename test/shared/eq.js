@@ -5,5 +5,10 @@ var R = require('../../source');
 
 module.exports = function(actual, expected) {
   assert.strictEqual(arguments.length, 2);
-  assert.strictEqual(R.toString(actual), R.toString(expected));
+
+  if (typeof actual === 'object') {
+    assert.strictEqual(JSON.stringify(actual), JSON.stringify(expected));
+  } else {
+    assert.strictEqual('' + actual, '' + expected);
+  }
 };
