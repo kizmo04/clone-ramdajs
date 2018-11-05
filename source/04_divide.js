@@ -20,8 +20,14 @@
  *      const reciprocal = R.divide(1);
  *      reciprocal(4);   //=> 0.25
  */
-var divide = function divide() {
-
+var divide = function divide(...values) {
+  if (values.length === 1) {
+    return divide.bind(this, values[0]);
+  } else if (values.length > 1) {
+    return Number(values[0]) / Number(values[1]);
+  } else {
+    return divide;
+  }
 };
 
 export default divide;
